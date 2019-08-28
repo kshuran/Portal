@@ -1,2 +1,3 @@
 # Portal
-Portal for problems of software (Java, Spring, Hibernate, Thymeleaf, Bootstrap, ApacheDS)
+Portal for problems of software.
+(I've used Java, Spring, Hibernate, Thymeleaf, Bootstrap, ApacheDS to develop Portal)
