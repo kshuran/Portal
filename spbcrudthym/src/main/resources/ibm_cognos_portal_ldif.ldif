@@ -1,0 +1,66 @@
+version: 1
+
+dn: dc=example,dc=com
+objectclass: top
+objectclass: domain
+dc: example
+
+dn: ou=groups,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: ou=Users,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: Users
+
+dn: cn=manager,ou=groups,dc=example,dc=com
+objectClass: groupOfNames
+objectClass: top
+cn: manager
+member: uid=manager1,ou=Users,dc=example,dc=com
+
+dn: cn=admin,ou=groups,dc=example,dc=com
+objectClass: groupOfNames
+objectClass: top
+cn: admin
+member: uid=userone,ou=CognosUsers,dc=example,dc=com
+
+dn: uid=user2,ou=Users,dc=example,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: user2
+sn: user2
+uid: user2
+userPassword:: somepassword
+ Q==
+
+dn: uid=userone,ou=Users,dc=example,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: userone
+sn: userone
+departmentNumber: 2
+employeeNumber: 1
+givenName: userone
+roomNumber: 1
+telephoneNumber: 1
+uid: userone
+userPassword:: somepassword
+ Q==
+
+dn: uid=manager1,ou=Users,dc=example,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: manager1
+sn: manager1
+uid: manager1
+userPassword:: somepassword
+ Q==
