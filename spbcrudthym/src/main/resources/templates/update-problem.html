@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="#" th:action="@{/update/{id}(id=${problem.id})}"
+		th:object="${problem}" method="post">
+		<label for="problem">Problem: </label> 
+		<input type="text" th:field="*{problem}"
+			id="problem" placeholder="Problem"> <span
+			th:if="${#fields.hasErrors('problem')}" th:errors="*{problem}"></span> 
+		<input
+			type="submit" value="Update Problem">
+	</form>
+</body>
+</html>

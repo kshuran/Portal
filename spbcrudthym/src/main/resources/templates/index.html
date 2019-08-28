@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home page</title>
+
+    <!-- Bootstrap core CSS -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" crossorigin="anonymous">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/album.css}" rel="stylesheet">
+  </head>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Portal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/home}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" th:each="product : ${T(hello.entity.Product).values()}">
+      	<a class="nav-link" th:href="@{/user/{product}(product=${product})}" th:text="${product}"></a>
+      </li>
+    </ul>
+  	<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Out</button>
+    </form>
+  </div>
+</nav>
+
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Portal</h1>
+      <p class="lead text-muted">Welcome to Portal</p>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+          <img th:src="@{/assets/brand/OracleBI.jpg}"
+			width="100%" height="225" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail">            
+			<div class="card-body">
+              <p class="card-text">Oracle BI</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="http://oraclebi.link.com:9502/analytics/" 
+                  		target="_blank" class="btn btn-sm btn-outline-secondary">Go</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img th:src="@{/assets/brand/Cognos.jpg}"
+				width="100%" height="225" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail">
+            <div class="card-body">
+              <p class="card-text">IBM Cognos Analytics</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="http://ibm.link.com/analytics/bi/" 
+                  		target="_blank" class="btn btn-sm btn-outline-secondary">Go</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img th:src="@{/assets/brand/IntelligencePortal.jpg}"
+				width="100%" height="225" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail">
+            <div class="card-body">
+              <p class="card-text">Intelligence Portal</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="http://ibm.link.com/apollo/" 
+                  		target="_blank" class="btn btn-sm btn-outline-secondary">Go</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img th:src="@{/assets/brand/ISPortal.jpg}"
+				width="100%" height="225" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail">
+            <div class="card-body">
+              <p class="card-text">Information Store Portal</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="http://ibm.link.com/opal/" 
+                  		target="_blank" class="btn btn-sm btn-outline-secondary">Go</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3><a th:href="@{/user}">My questions</a></h3>
+      <h3><a th:href="@{/cases}">Cases</a></h3>
+      <h3 sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')"><a th:href="@{/manager/units}">Units</a></h3>
+      <h3 sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')"><a th:href="@{/manager/persons}">Employees</a></h3>
+      <h3 sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">Administrator</a></h3>
+    </div>
+  </div>
+
+</main>
+
+<script th:src="@{/assets/js/vendor/jquery-slim.min.js}" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script th:src="@{/js/bootstrap.bundle.min.js}" crossorigin="anonymous"></script>
+
+</body>
+</html>

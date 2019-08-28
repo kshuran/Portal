@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Add problem</title>
+
+	<!-- Bootstrap core CSS -->
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
+		crossorigin="anonymous">
+
+	<style>
+	.bd-placeholder-img {
+		font-size: 1.125rem;
+		text-anchor: middle;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	@media ( min-width : 768px) {
+		.bd-placeholder-img-lg {
+			font-size: 3.5rem;
+		}
+	}
+	</style>
+	
+	<!-- Custom styles for this template -->
+	<link th:href="@{/css/form-validation.css}" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Portal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/home}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" th:each="product : ${T(hello.entity.Product).values()}">
+      	<a class="nav-link" th:href="@{/user/{product}(product=${product})}" th:text="${product}"></a>
+      </li>
+    </ul>
+  	<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Out</button>
+    </form>
+  </div>
+</nav>
+
+    <div class="container">
+  <div class="py-5 text-center">
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Information about problem</h4>
+      <form class="needs-validation was-validated" novalidate="" 
+      	action="#" th:action="@{/user/{product}/add(product=${product})}"
+		th:object="${problem}" method="post" id="form1">
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <label for="person">Person:</label>
+            <h6 class="my-0" th:inline="text" th:field="*{person}">[[${#httpServletRequest.remoteUser}]]</h6>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="product">Product</label>
+            <h6 class="my-0" th:text="*{product}"></h6>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="problemDescription">Describe problem</label>
+          <div class="input-group">
+          	<textarea th:field="*{problemDescription}" rows="5" cols="100"
+				placeholder="Describe Your Problem" id="problemDescription" required="" ></textarea>
+            <div class="invalid-feedback" style="width: 100%;">
+              Your information about problem is required.
+            </div>
+          </div>
+          <span th:if="${#fields.hasErrors('problemDescription')}"
+				th:errors="*{problemDescription}"></span>
+        </div>
+        
+        <input type="hidden" name="prevUri" id="prevUri" th:value="${prevUri}">
+        
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Add information about your problem</button>
+      </form>
+
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">© 2019 Portal</p>
+  </footer>
+</div>
+<script th:src="@{/assets/js/vendor/jquery-slim.min.js}" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script th:src="@{/assets/js/vendor/jquery-slim.min.js}"><\/script>')</script>
+      <script th:src="@{/js/bootstrap.bundle.min.js}" crossorigin="anonymous"></script>
+        <script th:src="@{/js/form-validation.js}"></script>
+
+</body>
+</html>

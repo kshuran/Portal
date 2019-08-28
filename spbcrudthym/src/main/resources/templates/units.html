@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Units</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<div class="header">
+		<h1>Information about Units</h1>
+	</div>
+	<div class="topnav">
+		<a th:href="@{/home}">Main page</a>
+		<form th:action="@{/logout}" method="post" style="float:right">
+			<input type="submit" value="Sign Out" />
+		</form>
+	</div>
+	
+	<div th:switch="${units}">
+		<h2 th:case="null">No units yet!</h2>
+		<div th:case="*">
+			<h2>Units</h2>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="unit : ${units}">
+						<td><a th:href="@{/manager/units/{id}(id=${unit.id})}" th:text="${unit.code}"></a></td>
+						<td><a th:href="@{/manager/units/{id}(id=${unit.id})}" th:text="${unit.name}"></a></td>
+						<td><a th:href="@{/manager/units/edit/{id}(id=${unit.id})}">Edit</a></td>
+						<td><a th:href="@{/manager/units/delete/{id}(id=${unit.id})}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			<p><a th:href="@{/manager/units/addUnit}">Add new Unit</a></p>
+	</div>
+</body>
+</html>

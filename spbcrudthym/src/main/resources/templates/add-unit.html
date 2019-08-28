@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Add Unit</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<div class="topnav">
+		<a th:href="@{/home}">Main page</a>
+		<form th:action="@{/logout}" method="post" style="float:right">
+			<input type="submit" value="Sign Out" />
+		</form>
+	</div>
+	<h1>Form for adding new unit</h1>
+	<form action="#" th:action="@{/manager/units/addUnit}"
+		th:object="${unit}" method="post">
+		<label for="code">Code: </label>
+		<input type="text" th:field="*{code}"
+			id="code" placeholder="Unit code">
+			<span th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
+		<label for="name">Name: </label>
+		<input type="text" th:field="*{name}"
+			id="name" placeholder="Unit name">
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+		<input type="submit" value="Add Unit">
+	</form>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Edit Employee</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<div class="topnav">
+		<a th:href="@{/home}">Main page</a>
+		<form th:action="@{/logout}" method="post" style="float:right">
+			<input type="submit" value="Sign Out" />
+		</form>
+	</div>
+	<h1>Form for editing employee</h1>
+	<form action="#" th:action="@{/manager/persons/update/{id}(id=${person.id})}"
+		th:object="${person}" method="post">
+		<label for="name">Name: </label>
+		<select th:field="*{name}">
+			<option th:each="ldapPerson : ${ldapPersons}"
+					th:value="${ldapPerson}" th:text="${ldapPerson}" th:selected="(${person.name} == ${ldapPerson})? ${ldapPerson}"></option>
+		</select>
+		<label for="number">Number: </label>
+		<input type="text" th:field="*{number}"
+			id="number" placeholder="Employee number">
+			<span th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></span>
+		<label for="unit">Unit: </label>
+		<select th:field="*{unit}">
+			<option th:each="unit : ${units}"
+					th:value="${unit.id}" th:text="${unit.name}" th:selected="${unit.name}"></option>
+		</select>
+		<input type="submit" value="Update Unit">
+	</form>
+</body>
+</html>

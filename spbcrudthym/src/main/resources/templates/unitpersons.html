@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Employees of Unit</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<div class="header">
+		<h1>Information about <span th:text="${unit.name}"></span> Employees</h1>
+	</div>
+	<div class="topnav">
+		<a th:href="@{/home}">Main page</a>
+		<form th:action="@{/logout}" method="post" style="float:right">
+			<input type="submit" value="Sign Out" />
+		</form>
+	</div>
+	
+	<div th:switch="${unit}">
+		<h2 th:case="null">No employees yet!</h2>
+		<div th:case="*">
+			<h2>Employees</h2>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Number</th>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="person : ${unit.persons}">
+						<td th:text="${person.number}"></td>
+						<td th:text="${person.name}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			<p><a th:href="@{/manager/persons/addPerson}">Add new Employee</a></p>
+	</div>
+</body>
+</html>
